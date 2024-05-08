@@ -1,5 +1,5 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+# Build and deploy, with no error handling
+name: Build and deploy to rachel-fenichel.github.io/keyboard-experimentation
 
 on:
   # Runs on pushes targeting the default branch
