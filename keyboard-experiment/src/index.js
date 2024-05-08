@@ -21,7 +21,7 @@ Object.assign(javascriptGenerator.forBlock, forBlock);
 
 
 // Set up UI elements and inject Blockly
-const codeDiv = document.getElementById('generatedCode').firstChild;
+//const codeDiv = document.getElementById('generatedCode').firstChild;
 const blocklyDiv = document.getElementById('blocklyDiv');
 const ws = Blockly.inject(blocklyDiv, {renderer: 'zelos', toolbox});
 
@@ -37,7 +37,7 @@ installCursor(Blockly.getMainWorkspace().getMarkerManager());
 // In a real application, you probably shouldn't use `eval`.
 const runCode = () => {
   const code = javascriptGenerator.workspaceToCode(ws);
-  codeDiv.innerText = code;
+  //codeDiv.innerText = code;
 };
 
 // Load the initial state from defaultBlocks.js and run the code.

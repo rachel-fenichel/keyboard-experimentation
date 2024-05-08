@@ -14,6 +14,26 @@ export class ExtendedNavigationController extends NavigationController {
         this.registerAddOns();
     }
 
+    listShortcuts() {
+        const announcer = document.getElementById('announcer');
+
+        const registry = ShortcutRegistry.registry.getRegistry();
+        let text =
+            `<table>
+<thead>
+<tr>
+<td>Shortcut name</td>
+<td>Shortcut action</td>
+</tr>
+</thead>`;
+        for (const keyboardShortcut of Object.keys(registry)) {
+            const codeArray = ShortcutRegistry.registry.getKeyCodesByShortcutName(keyboardShortcut);
+            const prettyPrinted = keyCodeArrayToString(codeArray);
+            text += `<tr><td>${keyboardShortcut}</td> <td>${prettyPrinted}</td></tr>`;
+        }
+        announcer.innerHTML = text + '\n</table/>';
+    }
+
     registerListShortcuts() {
         const listShortcuts = {
             name: 'List shortcuts',
@@ -23,23 +43,7 @@ export class ExtendedNavigationController extends NavigationController {
             // List out the current shortcuts.
             // Adds a table to the announcer area.
             callback: (workspace) => {
-                const announcer = document.getElementById('announcer');
-
-                const registry = ShortcutRegistry.registry.getRegistry();
-                let text =
-                    `<table>
-<thead>
-  <tr>
-    <td>Shortcut name</td>
-    <td>Shortcut action</td>
-  </tr>
-</thead>`;
-                for (const keyboardShortcut of Object.keys(registry)) {
-                    const codeArray = ShortcutRegistry.registry.getKeyCodesByShortcutName(keyboardShortcut);
-                    const prettyPrinted = keyCodeArrayToString(codeArray);
-                    text += `<tr><td>${keyboardShortcut}</td> <td>${prettyPrinted}</td></tr>`;
-                }
-                announcer.innerHTML = text + '\n</table/>';
+                this.listShortcuts();
                 return true;
             },
         };
@@ -288,4 +292,5 @@ export function installNavController(workspace) {
     navigationController.addWorkspace(workspace);
     // Turns on keyboard navigation.
     navigationController.enable(workspace);
+    navigationController.listShortcuts();
 }
