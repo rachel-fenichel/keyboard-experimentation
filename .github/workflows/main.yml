@@ -32,8 +32,8 @@ jobs:
         with:
           node-version: latest
           cache: 'npm'
-      - run: npm ci
-      - run: npm run build
+      - run: cd keyboard-experiment && npm ci
+      - run: cd keyboard-experiment && npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
